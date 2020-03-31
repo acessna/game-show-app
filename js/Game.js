@@ -35,7 +35,6 @@ class Game{
     */
     startGame(){
         $('#overlay').hide();
-        const x = new Game();
 
         this.getRandomPhrase();
         this.phrase.addPhraseToDisplay();

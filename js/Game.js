@@ -3,7 +3,7 @@ class Game{
         this.missed = 0;
         this.phrases = this.createPhrases();
         this.activePhrase = this.getRandomPhrase();
-        this.phrase = new Phrase(this.getRandomPhrase);
+        this.phrase = new Phrase(this.getRandomPhrase());
     }
 
     /**
@@ -30,10 +30,15 @@ class Game{
         return this.phrases[ranNum]; 
     }
 
+    /**
+    * Begins game by selecting a random phrase and displaying it to user
+    */
     startGame(){
         $('#overlay').hide();
+        const x = new Game();
+
+        this.getRandomPhrase();
+        this.phrase.addPhraseToDisplay();
         
-        this.getRandomPhrase(); 
-        this.phrase.addPhraseToDisplay();       
     }
 }

@@ -2,7 +2,8 @@ class Game{
     constructor(){
         this.missed = 0;
         this.phrases = this.createPhrases();
-        this.activePhrase = null;
+        this.activePhrase = this.getRandomPhrase();
+        this.phrase = new Phrase(this.getRandomPhrase);
     }
 
     /**
@@ -27,5 +28,12 @@ class Game{
     getRandomPhrase(){
         let ranNum = Math.floor(Math.random() * 5);
         return this.phrases[ranNum]; 
+    }
+
+    startGame(){
+        $('#overlay').hide();
+        
+        this.getRandomPhrase(); 
+        this.phrase.addPhraseToDisplay();       
     }
 }

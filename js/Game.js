@@ -2,8 +2,7 @@ class Game{
     constructor(){
         this.missed = 0;
         this.phrases = this.createPhrases();
-        this.activePhrase = this.getRandomPhrase();
-        this.phrase = new Phrase(this.getRandomPhrase());
+        this.activePhrase = null;
     }
 
     /**
@@ -35,9 +34,7 @@ class Game{
     */
     startGame(){
         $('#overlay').hide();
-
-        this.getRandomPhrase();
-        this.phrase.addPhraseToDisplay();
-        
+        this.activePhrase = this.getRandomPhrase();
+        this.activePhrase.addPhraseToDisplay();     
     }
 }

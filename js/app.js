@@ -1,3 +1,6 @@
-const game = new Game();
-game.startGame();
-console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
+let game;
+
+document.getElementById("btn__reset").addEventListener("click", (e) => {
+    game = new Game();
+    game.startGame();
+}); 

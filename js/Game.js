@@ -14,7 +14,7 @@ class Game{
         new Phrase('better late than never'),
         new Phrase('another day another dollar'),
         new Phrase('its a trap'),
-        new Phrase('the spoon isnt real')
+        new Phrase('there is no spoon')
         ];
 
         
@@ -37,4 +37,47 @@ class Game{
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();     
     }
+
+    /**
+    * Checks for winning move
+    * @return {boolean} True if game has been won, false if game wasn't
+    won
+    */
+    checkForWin(){
+        if($('#phrase li').hasClass('hide letter')){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    /**
+    * Increases the value of the missed property
+    * Removes a life from the scoreboard
+    * Checks if player has remaining lives and ends game if player is out
+    */
+    removeLife(){
+        this.missed = this.missed + 1;
+        console.log(this.missed);
+        let tries = document.querySelectorAll('.tries');
+
+        for (let i = 0; i < tries.length; i++) {
+            if(tries.className = 'tries'){
+                tries[i].classList.remove('tries');
+                tries[i].classList.add('lost-life');
+                tries[i].innerHTML = 
+                "<img src= 'images/lostHeart.png' alt='Lost Icon' height='35' width='30'>";
+                break;
+            }            
+        };
+
+        /* if(tries = 5){
+            this.gameOver();
+        }
+
+ */
+
+    };
+
+
 }

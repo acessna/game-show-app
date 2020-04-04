@@ -42,7 +42,7 @@ class Phrase{
     * @param (string) letter - Letter to display
     */
     showMatchedLetter(letter) {
-        $('#phrase li').removeClass(`hide letter ${letter}`).addClass('show');
+        $(`.${letter}`).removeClass().addClass('show');
 
     }
 

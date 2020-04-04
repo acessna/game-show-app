@@ -58,7 +58,7 @@ class Game{
     */
     removeLife(){
         this.missed = this.missed + 1;
-        console.log(this.missed);
+        
         let tries = document.querySelectorAll('.tries');
 
         for (let i = 0; i < tries.length; i++) {
@@ -71,13 +71,33 @@ class Game{
             }            
         };
 
-        /* if(tries = 5){
-            this.gameOver();
+        if(this.missed === 5){
+            this.gameOver(false);
+        }
+        
+
+    }
+
+    /**
+    * Displays game over message
+    * @param {boolean} gameWon - Whether or not the user won the game
+    */
+    gameOver(gameWon){
+        $('#overlay').show();
+
+        if(gameWon === true){
+            $('#overlay').removeClass('start').addClass('win');
+            $('#game-over-message').html("By Azura, by Azura, by Azura! It's the Grand Champion! You've won!");
+        } else{
+            $('#overlay').removeClass('start').addClass('lose');
+            $('#game-over-message').html('You\'ve taken an arrow to the knee! Try again?');
         }
 
- */
 
-    };
+
+    }
+
+
 
 
 }

@@ -58,7 +58,7 @@ class Game{
     */
     removeLife(){
         this.missed = this.missed + 1;
-        
+
         let tries = document.querySelectorAll('.tries');
 
         for (let i = 0; i < tries.length; i++) {
@@ -96,6 +96,24 @@ class Game{
 
 
     }
+
+    /**
+    * Handles onscreen keyboard button clicks
+    * @param (HTMLButtonElement) button - The clicked button element
+    */
+    handleInteraction(button) {
+        let selectedLetter = $(button).html();        
+        let phrase = new Phrase(game.activePhrase);
+        console.log(selectedLetter);
+        console.log(button);
+       if(phrase.checkLetter(selectedLetter) === true){
+           console.log('if');
+           $(button).addClass('chosen');
+           phrase.showMatchedLetter(selectedLetter);
+
+       }
+        
+    };
 
 
 

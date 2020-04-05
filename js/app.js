@@ -3,6 +3,7 @@ let game;
 document.getElementById("btn__reset").addEventListener("click", () => {
     game = new Game();
     game.startGame();
+    $('#overlay').removeClass('win lose');
 }); 
 
 $(".key").on('click', function (e) {
@@ -11,3 +12,4 @@ $(".key").on('click', function (e) {
     game.handleInteraction(button);
     
 });
+

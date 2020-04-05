@@ -10,9 +10,9 @@ class Game{
     * @return {array} An array of phrases that could be used in the game
     */
     createPhrases(){
-        return [new Phrase('life is like a box of chocolates'),
+        return [new Phrase('dont call me shirley'),
         new Phrase('better late than never'),
-        new Phrase('another day another dollar'),
+        new Phrase('you shall not pass'),
         new Phrase('its a trap'),
         new Phrase('there is no spoon')
         ];
@@ -51,32 +51,6 @@ class Game{
         }
     }
 
-    /**
-    * Increases the value of the missed property
-    * Removes a life from the scoreboard
-    * Checks if player has remaining lives and ends game if player is out
-    */
-    removeLife(){
-        this.missed = this.missed + 1;
-
-        let tries = document.querySelectorAll('.tries');
-
-        for (let i = 0; i < tries.length; i++) {
-            if(tries.className = 'tries'){
-                tries[i].classList.remove('tries');
-                tries[i].classList.add('lost-life');
-                tries[i].innerHTML = 
-                "<img src= 'images/lostHeart.png' alt='Lost Icon' height='35' width='30'>";
-                break;
-            }            
-        };
-
-        if(this.missed === 5){
-            this.gameOver(false);
-        }
-        
-
-    }
 
     /**
     * Displays game over message
@@ -84,7 +58,20 @@ class Game{
     */
     gameOver(gameWon){
         $('#overlay').show();
+        $('#phrase li').remove();
+        $('.key').removeClass('chosen wrong').removeAttr('disabled');
 
+        let tries = document.querySelectorAll('.lost-life');
+
+        for (let i = 0; i < tries.length; i++) {
+            if(tries.className = 'lost-life'){
+                tries[i].classList.remove('lost-life');
+                tries[i].classList.add('tries');
+                tries[i].innerHTML = 
+                "<img src= 'images/liveHeart.png' alt='Lost Icon' height='35' width='30'>";
+            }            
+        };
+        
         if(gameWon === true){
             $('#overlay').removeClass('start').addClass('win');
             $('#game-over-message').html("By Azura, by Azura, by Azura! It's the Grand Champion! You've won!");
@@ -93,9 +80,34 @@ class Game{
             $('#game-over-message').html('You\'ve taken an arrow to the knee! Try again?');
         }
 
-
-
     }
+
+    /**
+    * Increases the value of the missed property
+    * Removes a life from the scoreboard
+    * Checks if player has remaining lives and ends game if player is out
+    */
+   removeLife(){
+    this.missed = this.missed + 1;
+
+    let tries = document.querySelectorAll('.tries');
+
+    for (let i = 0; i < tries.length; i++) {
+        if(tries.className = 'tries'){
+            tries[i].classList.remove('tries');
+            tries[i].classList.add('lost-life');
+            tries[i].innerHTML = 
+            "<img src= 'images/lostHeart.png' alt='Lost Icon' height='35' width='30'>";
+            break;
+        }            
+    };
+
+    if(this.missed === 5){
+        this.gameOver(false);
+    }
+    
+
+}
 
     /**
     * Handles onscreen keyboard button clicks
@@ -103,16 +115,22 @@ class Game{
     */
     handleInteraction(button) {
         let selectedLetter = $(button).html();        
-        let phrase = new Phrase(game.activePhrase);
-        console.log(selectedLetter);
-        console.log(button);
+        let phrase = new Phrase(game.activePhrase.phrase);
+        button.setAttribute('disabled', true);
+
        if(phrase.checkLetter(selectedLetter) === true){
-           console.log('if');
            $(button).addClass('chosen');
            phrase.showMatchedLetter(selectedLetter);
-
+           if(this.checkForWin() === true){
+               console.log('if')
+               game.gameOver(true);
+           } 
+       } 
+       if(phrase.checkLetter(selectedLetter) === false){
+            $(button).addClass('wrong');
+            game.removeLife();
        }
-        
+    
     };
 
 

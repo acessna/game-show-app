@@ -25,7 +25,7 @@ class Game{
     * @return {Object} Phrase object chosen to be used
     */
     getRandomPhrase(){
-        let ranNum = Math.floor(Math.random() * 5);
+        let ranNum = Math.floor(Math.random() * this.phrases.length);     
         return this.phrases[ranNum]; 
     }
 

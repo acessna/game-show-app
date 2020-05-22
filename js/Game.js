@@ -113,13 +113,16 @@ class Game{
     * Handles onscreen keyboard button clicks
     * @param (HTMLButtonElement) button - The clicked button element
     */
-    handleInteraction(button) {
-        let selectedLetter = $(button).html();        
+    handleInteraction(selectedLetter) {
+        console.log(selectedLetter);
+
+        let $button = $('.key:contains("' + selectedLetter + '")');
+
         let phrase = new Phrase(game.activePhrase.phrase);
-        button.setAttribute('disabled', true);
+        $button.attr('disabled', true);
 
        if(phrase.checkLetter(selectedLetter) === true){
-           $(button).addClass('chosen');
+           $button.addClass('chosen');
            phrase.showMatchedLetter(selectedLetter);
            if(this.checkForWin() === true){
                console.log('if')
@@ -127,7 +130,7 @@ class Game{
            } 
        } 
        if(phrase.checkLetter(selectedLetter) === false){
-            $(button).addClass('wrong');
+            $button.addClass('wrong');
             game.removeLife();
        }
     

@@ -114,8 +114,6 @@ class Game{
     * @param (HTMLButtonElement) button - The clicked button element
     */
     handleInteraction(selectedLetter) {
-        console.log(selectedLetter);
-
         let $button = $('.key:contains("' + selectedLetter + '")');
 
         let phrase = new Phrase(game.activePhrase.phrase);
